@@ -4,7 +4,7 @@ LinkingInfo=-L/home/ff/cs61c/bin/static -l61Ccc-lexer
 61Ccc : main.o cgen.o cgen-helpers.o instructions.o
 	gcc $(Flags) -o 61Ccc main.o cgen.o cgen-helpers.o instructions.o $(LinkingInfo)
 
-main.o : main.c tokens.h tokenizer.h parser.h parser-errors.h preprocessor.h ast.h ast-print.h
+main.o : main.c tokens.h tokenizer.h parser.h parser-errors.h preprocessor.h ast.h ast-print.h dast.h decorate.h decorate-errors.h cgen.h cgen-helpers.h
 	gcc $(Flags) -c main.c
 
 cgen.o: cgen.c cgen.h dast.h instructions.h decorate.h cgen-helpers.h
