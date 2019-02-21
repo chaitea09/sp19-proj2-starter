@@ -24,14 +24,14 @@ void GenerateCode(DAST* dast, char* filename) {
     // Allocating for a string requires a label
     if (curr->group == DECL_STR) {
       // if we're declaring a string
-      char* label = generateStringLabel(s, curr->contents.str_info.str_literal);
+      char* label = generateStringLabel(curr->contents.str_info.str_literal);
       emitLABEL(label);
       generateString(curr);
     // Allocating for a global variable just requires initializing a value
     } else if (curr->group == DECL_VAR) {
       if (curr->is_string) {
         // if our global var has a str value
-        generateDataLabel (generateStringLabel (s, curr->contents.str_info.str_literal), curr->data_size);
+        generateDataLabel (generateStringLabel (curr->contents.str_info.str_literal), curr->data_size);
       } else {
         // if any other value
         int64_t value = 0;

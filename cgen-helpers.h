@@ -13,6 +13,8 @@ typedef struct string_label_map {
   struct string_label_map* next;
 } string_label_map;
 
+extern string_label_map* s;
+
 void freeStringList(string_label_map* lst);
 
 /* Create new local label for use anywhere */
@@ -25,7 +27,7 @@ char* generateLocalLabel();
 char *generateFunctionEndLabel (char *func_name);
 
 /* Create new string label for given string and add to string_label_map s */
-char* generateStringLabel(string_label_map* s, char* str);
+char* generateStringLabel(char* str);
 
 void generateString(Decl* curr);
 
