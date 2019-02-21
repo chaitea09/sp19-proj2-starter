@@ -6,7 +6,7 @@ LinkingInfo=-L/home/ff/cs61c/bin/static -l61Ccc-notcgen
 	gcc $(Flags) -o 61ccc main.o cgen.o instructions.o cgen-helpers.o $(LinkingInfo)
 
 main.o : main.c cgen.h cgen-helpers.h
-	gcc $(Flags) -c main.c
+	gcc $(Flags) -c main.c $(LinkingInfo)
 
 cgen.o: cgen.c cgen.h dast.h instructions.h cgen-helpers.h
 	gcc $(Flags) -c cgen.c
