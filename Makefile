@@ -1,5 +1,5 @@
 Flags=-Wall -g -std=c99
-LinkingInfo=-L/home/ff/cs61c/bin/static -l61Ccc-lexer
+LinkingInfo=-L/home/ff/cs61c/bin/static -l61Ccc-notcgen
 
 61Ccc : main.o cgen.o cgen-helpers.o instructions.o
 	gcc $(Flags) -o 61Ccc main.o cgen.o cgen-helpers.o instructions.o $(LinkingInfo)

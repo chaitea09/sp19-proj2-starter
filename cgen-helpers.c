@@ -46,7 +46,7 @@ char *generateFunctionEndLabel (char *func_name) {
 }
 
 /* Create new string label for given string and add to string_label_map s */
-char* generateStringLabel(string_label_map* s, char* str) {
+char* generateStringLabel(char* str) {
   if (s == NULL) {
     char *label = (char*)malloc(sizeof("__str__") + 4);
     sprintf(label, "__str__%d", STR_COUNT);
