@@ -99,90 +99,360 @@ void processExprBinaryAdd(DAST* dast,
                           char* startLabel,
                           char* endLabel) {
   /* YOUR CODE HERE */
+
+
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitADD(S1, S1, T0); // add values and place result in S1 to keep invariant true
+  emitADDI(SP, SP, WORDSIZE);
+
+
+
 }
 
 void processExprBinarySub(DAST* dast,
                           char* startLabel,
                           char* endLabel) {
   /* YOUR CODE HERE */
+
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, T0, S1); // add values and place result in S1 to keep invariant true
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryMul(DAST* dast,
                           char* startLabel,
                           char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitMUL(S1, T0, S1); // add values and place result in S1 to keep invariant true
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryDiv(DAST* dast,
                           char* startLabel,
                           char* endLabel) {
   /* YOUR CODE HERE */
+  /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitDIV(S1, T0, S1); // add values and place result in S1 to keep invariant true
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryEq(DAST* dast,
                          char* startLabel,
                          char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, T0, S1);
+  emitSEQZ(S1, S1);
+  emitADDI(SP, SP, WORDSIZE);
+
+
+
 }
 
 void processExprBinaryNotEq(DAST* dast,
                             char* startLabel,
                             char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, T0, S1);
+  emitSNEZ(S1, S1);
+  emitADDI(SP, SP, WORDSIZE);
+
 }
 
 void processExprBinaryGTEq(DAST* dast,
                            char* startLabel,
                            char* endLabel) {
  /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, S1, T0);
+  emitSEQZ(T1, S1);
+  emitSLT(S1, S1, x0);
+  emitOR(S1, S1, T1);
+  emitADDI(SP, SP, WORDSIZE);
+
 }
 
 void processExprBinaryGT(DAST* dast,
                          char* startLabel,
                          char* endLabel) {
   /* YOUR CODE HERE */
+  /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, S1, T0);
+  emitSLT(S1, S1, x0);
+  emitADDI(SP, SP, WORDSIZE);
+
 }
 
 void processExprBinaryLTEq(DAST* dast,
                            char* startLabel,
                            char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, T0, S1);
+  emitSEQZ(T1, S1);
+  emitSLT(S1, S1, 0);
+  emitOR(S1, S1, T1);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryLT(DAST* dast,
                          char* startLabel,
                          char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSUB(S1, T0, S1);
+  emitSLT(S1, S1, x0);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryLogicAnd(DAST* dast,
                                char* startLabel,
                                char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSNEZ(S1, S1);
+  emitSNEZ(T0, T0);
+  emitAND(S1, T0, S1);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryLogicOr(DAST* dast,
                               char* startLabel,
                               char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitSNEZ(S1, S1);
+  emitSNEZ(T0, T0);
+  emitOR(S1, T0, S1);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryBitAnd(DAST* dast,
                              char* startLabel,
                              char* endLabel) {
   /* YOUR CODE HERE */
+  /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitAND(S1, S1, T0);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryBitOr(DAST* dast,
                             char* startLabel,
                             char* endLabel) {
   /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitOR(S1, S1, T0);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprBinaryBitXor(DAST* dast,
                              char* startLabel,
                              char* endLabel) {
   /* YOUR CODE HERE */
+  /* YOUR CODE HERE */
+  DAST * leftChild = dast->children[0];
+  DAST * rightChild = dast->children[1];
+  dispatch(leftChild, startLabel, endLabel);
+
+
+  /* our left expr result is now in S1! but... if we call dispatch on child2, 
+   * we'll overwrite the value from child1... */
+  // make room on the stack/move pointer
+  emitADDI(SP, SP, -WORDSIZE);
+  emitSW(S1, 0, SP);  // save value to stack
+
+  /* yay! S1 is free to use */
+  dispatch(rightChild, startLabel, endLabel); // S1 holds right expr result
+  emitLW(T0, 0, SP); // load left expr result from stack
+  emitXOR(S1, S1, T0);
+  emitADDI(SP, SP, WORDSIZE);
 }
 
 void processExprPrefixNegate(DAST* dast,
@@ -293,6 +563,26 @@ void processFuncDecl(DAST* dast, char* startLabel, char* endLabel) {
       - Generate code for function body
       - Set up stack and frame
     */
+    emitADDI(SP, SP, -13*WORDSIZE);
+    emitSW(FP, 0, SP);
+    emitADDI(FP, SP, 0);
+    
+    //Make space
+
+    emitSW(S11, 4, SP);
+    emitSW(S10, 8, SP);
+    emitSW(S9, 12, SP);
+    emitSW(S8, 16, SP);
+    emitSW(S7, 20, SP);
+    emitSW(S6, 24, SP);
+    emitSW(S5, 28, SP);
+    emitSW(S4, 32, SP);
+    emitSW(S3, 36, SP);
+    emitSW(S2, 40, SP);
+    emitSW(S1, 44, SP);
+    emitSW(RA, 48, SP);
+
+    dispatch(func_body, startLabel, endLabel);
 
     // produce a label for return statements to come back to
     char *total_string = generateFunctionEndLabel (func_id->data.identifier);
@@ -304,7 +594,25 @@ void processFuncDecl(DAST* dast, char* startLabel, char* endLabel) {
       - Epilogue
       - Restore stack and frame
     */
+    emitLW(RA, 48, SP);
+    emitLW(S1, 44, SP);
+    emitLW(S2, 40, SP);
+    emitLW(S3, 36, SP);
+    emitLW(S4, 32, SP);
+    emitLW(S5, 28, SP);
+    emitLW(S6, 24, SP);
+    emitLW(S7, 20, SP);
+    emitLW(S8, 16, SP);
+    emitLW(S9, 12, SP);
+    emitLW(S10, 8, SP);
+    emitLW(S11, 4, SP);
+    emitLW(FP, 0, FP);
+    emitADDI(SP, FP, 0);
 
+  
+
+
+    
     if (strcmp ("main", func_id->data.identifier) == 0) {
       // If we are the main function we want to exit to
       // be compatible with venus.
